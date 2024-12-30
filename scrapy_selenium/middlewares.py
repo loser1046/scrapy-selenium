@@ -64,7 +64,17 @@ class SeleniumMiddleware:
             capabilities = driver_options.to_capabilities()
             self.driver = webdriver.Remote(command_executor=command_executor,
                                            desired_capabilities=capabilities)
-
+        # webdriver-manager
+        else:
+            # selenium4+ & webdriver-manager
+            from selenium import webdriver
+            from webdriver_manager.chrome import ChromeDriverManager
+            from selenium.webdriver.chrome.service import Service as ChromeService
+            if driver_name and driver_name.lower() == 'chrome':
+                # options = webdriver.ChromeOptions()
+                # options.add_argument(o)
+                self.driver = webdriver.Chrome(options=driver_options,
+                                               service=ChromeService(ChromeDriverManager().install()))
     @classmethod
     def from_crawler(cls, crawler):
         """Initialize the middleware with the crawler settings"""
