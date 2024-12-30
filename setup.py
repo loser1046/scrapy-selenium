@@ -2,7 +2,7 @@
 
 from setuptools import setup, find_packages
 try:
-    from pip.download import PipSession
+    from pip._internal.network.session import PipSession
     from pip.req import parse_requirements
 except ImportError:
     # It is quick hack to support pip 10 that has changed its internal
